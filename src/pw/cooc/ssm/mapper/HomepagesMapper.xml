@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pw.cooc.ssm.mapper.HomepagesMapper" >
+  <resultMap id="BaseResultMap" type="pw.cooc.ssm.po.Homepages" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="image2" property="image2" jdbcType="VARCHAR" />
+    <result column="image3" property="image3" jdbcType="VARCHAR" />
+    <result column="image4" property="image4" jdbcType="VARCHAR" />
+    <result column="image5" property="image5" jdbcType="VARCHAR" />
+    <result column="image6" property="image6" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="pw.cooc.ssm.po.HomepagesWithBLOBs" extends="BaseResultMap" >
+    <result column="text" property="text" jdbcType="LONGVARCHAR" />
+    <result column="last" property="last" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, image1, image2, image3, image4, image5, image6
+  </sql>
+  <sql id="Blob_Column_List" >
+    text, last
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="pw.cooc.ssm.po.HomepagesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from homepages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pw.cooc.ssm.po.HomepagesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from homepages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+
+    <include refid="Blob_Column_List" />
+    from homepages
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from homepages
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pw.cooc.ssm.po.HomepagesExample" >
+    delete from homepages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pw.cooc.ssm.po.HomepagesWithBLOBs" >
+    insert into homepages (id, image1, image2, 
+      image3, image4, image5, 
+      image6, text, last
+      )
+    values (#{id,jdbcType=INTEGER}, #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, 
+      #{image3,jdbcType=VARCHAR}, #{image4,jdbcType=VARCHAR}, #{image5,jdbcType=VARCHAR}, 
+      #{image6,jdbcType=VARCHAR}, #{text,jdbcType=LONGVARCHAR}, #{last,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pw.cooc.ssm.po.HomepagesWithBLOBs" >
+    insert into homepages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="image1 != null" >
+        image1,
+      </if>
+      <if test="image2 != null" >
+        image2,
+      </if>
+      <if test="image3 != null" >
+        image3,
+      </if>
+      <if test="image4 != null" >
+        image4,
+      </if>
+      <if test="image5 != null" >
+        image5,
+      </if>
+      <if test="image6 != null" >
+        image6,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="last != null" >
+        last,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null" >
+        #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="image5 != null" >
+        #{image5,jdbcType=VARCHAR},
+      </if>
+      <if test="image6 != null" >
+        #{image6,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="last != null" >
+        #{last,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pw.cooc.ssm.po.HomepagesExample" resultType="java.lang.Integer" >
+    select count(*) from homepages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update homepages
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.image1 != null" >
+        image1 = #{record.image1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image2 != null" >
+        image2 = #{record.image2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image3 != null" >
+        image3 = #{record.image3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image4 != null" >
+        image4 = #{record.image4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image5 != null" >
+        image5 = #{record.image5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image6 != null" >
+        image6 = #{record.image6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text != null" >
+        text = #{record.text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.last != null" >
+        last = #{record.last,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update homepages
+    set id = #{record.id,jdbcType=INTEGER},
+      image1 = #{record.image1,jdbcType=VARCHAR},
+      image2 = #{record.image2,jdbcType=VARCHAR},
+      image3 = #{record.image3,jdbcType=VARCHAR},
+      image4 = #{record.image4,jdbcType=VARCHAR},
+      image5 = #{record.image5,jdbcType=VARCHAR},
+      image6 = #{record.image6,jdbcType=VARCHAR},
+      text = #{record.text,jdbcType=LONGVARCHAR},
+      last = #{record.last,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update homepages
+    set id = #{record.id,jdbcType=INTEGER},
+      image1 = #{record.image1,jdbcType=VARCHAR},
+      image2 = #{record.image2,jdbcType=VARCHAR},
+      image3 = #{record.image3,jdbcType=VARCHAR},
+      image4 = #{record.image4,jdbcType=VARCHAR},
+      image5 = #{record.image5,jdbcType=VARCHAR},
+      image6 = #{record.image6,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pw.cooc.ssm.po.HomepagesWithBLOBs" >
+    update homepages
+    <set >
+      <if test="image1 != null" >
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        image2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        image3 = #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null" >
+        image4 = #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="image5 != null" >
+        image5 = #{image5,jdbcType=VARCHAR},
+      </if>
+      <if test="image6 != null" >
+        image6 = #{image6,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="last != null" >
+        last = #{last,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="pw.cooc.ssm.po.HomepagesWithBLOBs" >
+    update homepages
+    set image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      image3 = #{image3,jdbcType=VARCHAR},
+      image4 = #{image4,jdbcType=VARCHAR},
+      image5 = #{image5,jdbcType=VARCHAR},
+      image6 = #{image6,jdbcType=VARCHAR},
+      text = #{text,jdbcType=LONGVARCHAR},
+      last = #{last,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pw.cooc.ssm.po.Homepages" >
+    update homepages
+    set image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      image3 = #{image3,jdbcType=VARCHAR},
+      image4 = #{image4,jdbcType=VARCHAR},
+      image5 = #{image5,jdbcType=VARCHAR},
+      image6 = #{image6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
